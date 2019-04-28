@@ -69,6 +69,15 @@ include_once 'inc/checklogin.php';
                   <li><a href="javascript:;" onclick="showaddinsuccess(this);" data-user_data='<?php echo json_encode($data,true) ?>'>Add in Success</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="javascript:;" onclick="showaddpayment(this);" data-user_data='<?php echo json_encode($data,true) ?>'>Add Payment</a></li>
+                  <li role="separator" class="divider"></li>
+                  <?php 
+                    if ($data[0]->paid==($data[0]->price*(1-$data[0]->discount/100))) {
+                  ?>
+                  <li><a href="javascript:;" onclick="showaddcertificate(this);" data-user_data='<?php echo json_encode($data,true) ?>'>Certification</a></li>
+                  <?php
+                    }
+                  ?>
+
                 </ul>
               </div>
 
@@ -249,6 +258,42 @@ include_once 'inc/checklogin.php';
           </div>
         </div>
 
+<!-- Add in Certification MODAL -->
+        <div class="modal fade bs-example-modal-lg" id="modal5" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add Certificate</h4>
+              </div>
+              <form action="process/certificate" class="form form-horizontal" method="post">
+                <div class="form-group row">
+                  <br>
+                    <label for="" class="col-md-2">Certificate Code:</label>
+                    <div class="col-md-6">
+                      <input type="text" name="certificateno" id="certificateno" required="required" class="form-control" placeholder=" Certificate Code">
+                    </div>
+                  </div>
+                <div class="form-group row">
+                  <br>
+                    <label for="" class="col-md-2">Course Completion Date:</label>
+                    <div class="col-md-6">
+                      <input type="date" name="coursecompletiontime" id="coursecompletiontime" required="required" class="form-control" placeholder=" Course Completion Date">
+                    </div>
+                  </div>
+                <div class="modal-footer">
+                  <input type="hidden" name="id" id="testimonials_id" value="<?php echo $_GET['id']; ?>">
+                  <input type="hidden" name="old_image" id="old_image">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
 
 
  <!-- Add in Add Payment MODAL -->
@@ -479,8 +524,31 @@ function showThumbnail(input){
 
     showform1();
   }
+   function showaddcertificate(element){
+    var user_info = $(element).data('user_data');
+    console.log(user_info);
+    if (typeof(user_info) != 'object') {
+      user_info = JSON.parse(user_info);
+    }
+    $('#myModalLabel').html('Add Certificate Number');
+    if (user_info[0].certificateno != null) {
+      $('#certificateno').val(user_info[0].certificateno);
+    }else{
+      $('#certificateno').val();
+    }
+    if (user_info[0].coursecompletiontime != null) {
+      $('#coursecompletiontime').val(user_info[0].coursecompletiontime);
+    }else{
+      $('#coursecompletiontime').val();
+    }
+
+    showform5();
+  }
   function showform1(){
     $('#modal2').modal();
+  }
+   function showform5(){
+    $('#modal5').modal();
   }
   function showaddpayment(element){
     var user_info = $(element).data('user_data');

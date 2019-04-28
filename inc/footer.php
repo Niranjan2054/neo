@@ -35,7 +35,7 @@
 						<div class="footer-widget style-2">
 							<h4>The Garden</h4>
 							<div class="about-widget">
-								<p>We are the professional the garden company to make your garden more beautiful and have the fresh air. We have more service for your choice.</p>
+								<p>Hi!, Warm Welcome to Neo Fusion School Of Computer. We are giving a most skillfull computer training from last 12 years with the objective of better Education</p>
 							</div>
 						</div>
 					</div>
@@ -44,11 +44,10 @@
 							<h4>Contact Info</h4>
 							<div class="contact-info style-3">
 								<ul>
-									<li><i class="fa fa-home"></i>20 Green Farm, New Zealand</li>
-									<li><i class="fa fa-phone"></i>06.5490732</li>
-									<li><i class="fa fa-envelope"></i>Support.thegarden@gmail.com</li>
-									<li><i class="fa fa-clock-o"></i>Monday - Saturday: 7.AM - 5.PM</li>
-									<li><i></i>Sunday CLOSED</li>
+									<li><i class="fa fa-home"></i>Neo Fusion, Inacho Bhaktapur</li>
+									<li><i class="fa fa-phone"></i>01 6618155</li>
+									<li><i class="fa fa-mobile"></i>+977 9843 025 317</li>
+									<li><i class="fa fa-envelope"></i>info@neofusionsoc.com</li>
 								</ul>
 							</div>
 						</div>
@@ -58,17 +57,19 @@
 							<h4>Navigation</h4>
 							<div class="fooer-menu">
 								<ul class="mr-40">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Service</a></li>
-									<li><a href="#">Gallery</a></li>
-									<li><a href="#">Blog</a></li>
-									<li><a href="#">Shop</a></li>
+									<li><a href="all-course">Courses</a></li>
+									<li><a href="about">About Us</a></li>
+									<li><a href="contact">Contact Us</a></li>
+									<li><a href="blog">Blog</a></li>
+									<li><a href="trace">Trace Us</a></li>
 								</ul>
 								<ul>
-									<li><a href="#">Delivery Information</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Term And Conditions</a></li>
-									<li><a href="contact">Contact Us</a></li>
+									<li><a href="service-1">Wedding Photography</a></li>
+									<li><a href="service-2">Art Workshop</a></li>
+									<li><a href="service-3">Computer Workshop</a></li>
+									<li><a href="gallery">Photo Gallery</a></li>
+									<li><a href="successgallery">Success Gallery</a></li>
+									<li><a href="certificate">Verify Certificate</a></li>
 								</ul>
 							</div>
 						</div>
@@ -78,13 +79,13 @@
 							<h4>Working Hours</h4>
 							<div class="work-hours">
 								<ul class="list-none">
+									<li>Sunday <span>06:00-20:00</span></li>
 									<li>Monday <span>07:00-17:00</span></li>
 									<li>Tuesday <span>07:00-17:00</span></li>
 									<li>Wednesday <span>07:00-17:00</span></li>
 									<li>Thursday <span>07:00-17:00</span></li>
 									<li>Friday <span>07:00-17:00</span></li>
-									<li>Saturday <span>07:00-17:00</span></li>
-									<li>Sunday <span>CLOSE</span></li>
+									<li>Saturday <span>CLOSE</span></li>
 								</ul>
 							</div>
 						</div>

@@ -110,6 +110,24 @@ abstract class database{
 				}
 			}
 			//WHERE Clause ENd
+			
+			//Ordering Start
+			if (isset($args['order']) && !empty($args['order'])) {
+				$this->sql .= " order by id ASC ";
+			}else{
+				$this->sql .= " order by id DESC ";
+			}
+			//Ordering End
+
+			//Limit Clause Start
+			if (isset($args['limit']) && !empty($args['limit'])) {
+				$this->sql .= " LIMIT ";
+				if (is_array($args['limit']) && !empty($args['limit'])) {
+					$this->sql .= $args['limit']['offset'].", ".$args['limit']['noofdata'];
+				}
+			}
+			//Limit Clause End
+
 			$this->stmt = $this->conn->prepare($this->sql);//prepare SQL
 			//BIND VALUE
 			if (isset($args['where']) && !empty($args['where'])) {
@@ -318,7 +336,12 @@ abstract class database{
 					}
 				}	
 			}
-			return $this->stmt->execute();
+			$success =  $this->stmt->execute();
+			if ($success) {
+				return $this->conn->lastInsertId();
+			}else{
+				return $success;
+			}
 		}catch (PDOException $e){
 			error_log(date('M d, Y h:i:s A')." : ( run Query) : ".$e->getMessage()."\r\n",3,ERROR_PATH.'error.log');
 			return false;
@@ -406,6 +429,7 @@ abstract class database{
 			// debugger($this->sql);
 			// debugger($this->stmt,true);
 			return $this->stmt->execute();//EXECUTE SQL
+			
 		}catch (PDOException $e){
 			error_log(date('M d, Y h:i:s A')." : ( DB Select Data) : ".$e->getMessage()."\r\n",3,ERROR_PATH.'error.log');
 			return false;

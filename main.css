@@ -20,3 +20,8 @@
 .msg-box.success .box-body .btn{background-color:#52ab42;color:#fff}
 .msg-box.success .box-body .btn:hover,.msg-box.success .box-body .btn:focus{background-color:#6ec15f}
 .msg-box.success .box-body a{color:#52ab42}
+#comment-message {
+    margin-left: 20px;
+    color: #189a18;
+    display: none;
+}

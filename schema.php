@@ -74,6 +74,26 @@
 			created_date datetime default current_timestamp,
 			updated_date datetime on UPDATE current_timestamp
 		)",
+		"gallery" => "CREATE TABLE  IF NOT EXISTS gallery
+		(
+			id int not null AUTO_INCREMENT PRIMARY KEY,
+			title varchar(50),
+			featured_image varchar(50),
+			type enum('excursion','event','classes','participation'),
+			description text,
+			status enum('Active','Inactive') default 'Active',
+			created_date datetime default current_timestamp,
+			updated_date datetime on UPDATE current_timestamp
+		)",
+		"image" => "CREATE TABLE  IF NOT EXISTS image
+		(
+			id int not null AUTO_INCREMENT PRIMARY KEY,
+			foreign_key varchar(50),
+			image varchar(50),
+			status enum('Active','Inactive') default 'Active',
+			created_date datetime default current_timestamp,
+			updated_date datetime on UPDATE current_timestamp
+		)",
 		"transaction" => "CREATE TABLE  IF NOT EXISTS transaction
 		(
 			id int not null AUTO_INCREMENT PRIMARY KEY,
@@ -100,10 +120,44 @@
 			created_date datetime default current_timestamp,
 			updated_date datetime on UPDATE current_timestamp
 		)",
+		"comment" => "CREATE TABLE  IF NOT EXISTS comment
+		(
+			id int not null AUTO_INCREMENT PRIMARY KEY,
+			commentid int,
+			postid int,
+			commentor varchar(50),
+			comment	text,
+			email varchar(50),
+			status enum('Active','Inactive') default 'Inactive',
+			created_date datetime default current_timestamp,
+			updated_date datetime on UPDATE current_timestamp
+		)",
 		"subscriber" => "CREATE TABLE  IF NOT EXISTS subscriber
 		(
 			id int not null AUTO_INCREMENT PRIMARY KEY,
 			email varchar(50),
+			status enum('Active','Inactive') default 'Active',
+			created_date datetime default current_timestamp,
+			updated_date datetime on UPDATE current_timestamp
+		)",
+		"blog" => "CREATE TABLE  IF NOT EXISTS blog
+		(
+			id int not null AUTO_INCREMENT PRIMARY KEY,
+			title varchar(250),
+			description text,
+			image varchar(50),
+			quote text,
+			quoteby varchar(50),
+			bypost varchar(50),
+			status enum('Active','Inactive') default 'Active',
+			created_date datetime default current_timestamp,
+			updated_date datetime on UPDATE current_timestamp
+		)",
+		"likes" => "CREATE TABLE  IF NOT EXISTS likes
+		(
+			id int not null AUTO_INCREMENT PRIMARY KEY,
+			commentid int,
+			likes int,
 			status enum('Active','Inactive') default 'Active',
 			created_date datetime default current_timestamp,
 			updated_date datetime on UPDATE current_timestamp

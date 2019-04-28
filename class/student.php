@@ -22,6 +22,16 @@ class student extends database
 			);
 		return $this->selectdata($args,$is_die);
 	}
+	public function getStudentByCertificateNo($certificateno,$is_die=false){
+		$args = array(
+			'where' =>array(
+					'and' => array(
+						'certificateno' => $certificateno
+					)
+				)
+			);
+		return $this->selectdata($args,$is_die);
+	}
 	public function deleteStudentbyId($id,$is_die =false){
 		$args = array(
 			'where' =>array(
@@ -67,6 +77,26 @@ class student extends database
 						'issuccess' => "yes"
 					)
 				)
+			);
+		return $this->selectdata($args,$is_die);
+	}
+	public function getSuccessStudentUsingLimit($offset,$noofdata,$is_die=false){
+		$args = array(
+			'where' =>array(
+					'and' => array(
+						'issuccess' => "yes"
+					)
+				),
+			'limit' =>array(
+					'offset' => $offset,
+					'noofdata' => $noofdata
+					)
+			);
+		return $this->selectdata($args,$is_die);
+	}
+	public function getallStudentwithCertified($args=array(),$is_die=false){
+		$args = array(
+			'where' => 'certificateno IS NOT NULL'
 			);
 		return $this->selectdata($args,$is_die);
 	}

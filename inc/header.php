@@ -57,22 +57,19 @@
 	  	<div class="header-top d-none d-sm-block">
 	  		<div class="container">
 	  			<div class="row align-items-center">
-	  				<div class="col-sm-9">
+	  				<div class="col-sm-10 col-md-10">
 	  					<div class="contact-info">
 	  						<ul>
 	  							<li><i class="fa fa-phone"></i>(+977) 9843 025 317 <span>|</span></li>
-	  							<li><i class="fa fa-home"></i>Neo Fusion School of Computer, Liwali Bhaktapur Nepal <span>|</span></li>
-	  							<li><i class="fa fa-time"></i>Sunday - Monday: 6.AM - 8.PM</li>
+	  							<li><i class="fa fa-home"></i>Neo Fusion, Liwali Bhaktapur Nepal <span>|</span></li>
+	  							<li><i class="fa fa-time"></i>Sunday - Friday: 6.AM - 8.PM</li>
 	  						</ul>
 	  					</div>
 	  				</div>
-	  				<div class="col-sm-3">
+	  				<div class="col-sm-2 col-md-2">
 						<div class="social-icons pull-right">
 							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-instagram"></i></a>
 							<a href="#"><i class="fa fa-youtube"></i></a>
-							<a href="#"><i class="fa fa-skype"></i></a>
 						</div>
 					</div>
 	  			</div>
@@ -87,7 +84,7 @@
 							<a href="index"><img src="assets/images/logo.png" alt="logo" width="40" height="29.34"></a>
 						</div>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-10">
 						<div class="mainmenu text-center">
 							<nav>
 								<ul>
@@ -112,13 +109,7 @@
 											<!-- <li><a href="404">Error 404</a></li> -->
 										</ul>
 									</li>
-									<li><a href="enquiry">Join Course</a>
-										<!-- <ul class="submenu">
-											<li><a href="about">About Us</a></li>
-											<li><a href="coming-soon">Coming Soon</a></li>
-											<li><a href="404">Error 404</a></li>
-										</ul> -->
-									</li>
+									<li><a href="enquiry">Join Course</a></li>
 
 									<li><a href="#">Services</a>
 										<ul class="submenu">
@@ -130,96 +121,15 @@
 									<li><a href="#">Gallery</a>
 										<ul class="submenu">
 											<li><a href="gallery">Photo Gallery</a></li>
-											<li><a href="gallery">Success Gallery</a></li>
+											<li><a href="successgallery">Success Gallery</a></li>
 											<!-- <li><a href="gallery-details">Gallery Details</a></li> -->
 										</ul>
 									</li>
 									<li><a href="blog">Blog</a>
-										<!-- <ul class="submenu">
-											<li><a href="blog-1">Blog One</a></li>
-											<li><a href="blog-2">Blog Two</a></li>
-											<li><a href="blog">Blog</a></li>
-											<li><a href="blog-4">Blog Four</a></li>
-											<li><a href="blog-details">Blog Details</a></li>
-										</ul> -->
 									</li>
-									<li><a href="coming-soon">Result</a>
-										<ul class="submenu">
-											<li><a href="coming-soon">Year 2071</a></li>
-											<li><a href="coming-soon">Year 2072</a></li>
-											<li><a href="coming-soon">Year 2073</a></li>
-											<li><a href="coming-soon">Year 2074</a></li>
-											<li><a href="coming-soon">Year 2074</a></li>
-											<li><a href="result">Result Page</a></li>
-										</ul>
-									</li>
-									<!-- <li><a href="contact">Contact Us</a></li> -->
+									<li><a href="contact">Contact</a></li>
 								</ul>
 							</nav>
-						</div>
-					</div>
-					<div class="col-sm-2" style="visibility: hidden;">
-						<div class="search-and-cart">
-							<!--search-box-->
-							<div class="search search-box">
-								<i class="fa fa-search searching-icon"></i>
-								<div class="search-place">
-									<input type="text" placeholder="Search" />
-								</div>							
-							</div>	
-							<!--shopping-cart-->
-							<!-- <div class="cart-link">
-								<a href="javascript:void(0);">
-									<i class="fa fa-shopping-cart"></i>
-									<span>2</span>
-								</a>
-								<ul class="list-none cart-dropdown">
-									<li>
-										<div class="mini-cart-thumb">
-											<a href="#"><img src="assets/images/cart/1.jpg" alt="" /></a>
-										</div>
-										<div class="mini-cart-heading">
-											<h5><a href="#">Aloe vera - herbal</a></h5>
-											<span>2 x $140.00</span>
-										</div>
-										<div class="mini-cart-remove">
-											<button><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-										</div>
-									</li>
-									<li>
-										<div class="mini-cart-thumb">
-											<a href="#"><img src="assets/images/cart/2.jpg" alt="" /></a>
-										</div>
-										<div class="mini-cart-heading">
-											<h5><a href="#">Haworthia Wide Zebra</a></h5>
-											<span>1 x $100.00</span>
-										</div>		  		                              
-										<div class="mini-cart-remove">
-											<button><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-										</div>
-									</li>
-									<li>
-										<div class="mini-cart-thumb">
-											<a href="#"><img src="assets/images/cart/3.jpg" alt="" /></a>
-										</div>
-										<div class="mini-cart-heading">
-											<h5><a href="#">Echeveria Succulent</a></h5>
-											<span>1 x $100.00</span>
-										</div>		  		                              
-										<div class="mini-cart-remove">
-											<button><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-										</div>
-									</li>
-									<li>
-										<div class="mini-cart-total">
-											<h5>Total: $280.00</h5>
-										</div>
-										<div class="mini-cart-checkout">
-											<a href="checkout">Checkout</a>
-										</div>
-									</li>
-								</ul>
-							</div> -->
 						</div>
 					</div>
 				</div>

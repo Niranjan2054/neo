@@ -1,2 +1,4 @@
-Apr 20, 2019 10:30:38 PM : ( run Query) : SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'last_login'
-Apr 20, 2019 10:36:53 PM : ( run Query) : SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'last_login'
+Apr 27, 2019 06:44:04 PM : (DB Connection): SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+
+Apr 27, 2019 06:44:05 PM : (DB Connection): SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+

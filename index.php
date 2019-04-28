@@ -278,19 +278,19 @@
 				<div class="col-md-3 col-sm-12">
 					<div class="single-counter">
 						<p class="count-number count2">120</p>
-						<h4>Happy Clients</h4>
+						<h4>Courses</h4>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-12">
 					<div class="single-counter">
 						<p class="count-number count3">50</p>
-						<h4>Decoration Awards</h4>
+						<h4>Success Student</h4>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-12">
 					<div class="single-counter">
 						<p class="count-number count4">240</p>
-						<h4>Coffee Music</h4>
+						<h4>Subscriber</h4>
 					</div>
 				</div>
 			</div>

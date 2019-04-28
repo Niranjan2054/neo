@@ -16,28 +16,48 @@
 		</div>
 	</div>
 	<!--banner-area end-->
-	
+	<?php 
+		if ($_GET) {
+			if (isset($_GET['b']) && !empty($_GET['b']) && $_GET['b']>0) {
+				$b = $_GET['b'];
+				$blogs = new blog();
+				$blog = $blogs->getBlogById($b);
+				$blog = $blog[0];
+			}
+		}else{
+			setFlash('blog');
+		}
+	?>
 	<!--blog-area start-->
 	<div class="blog-area mt-100 sm-mt-80">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-9 col-md-9 col-sm-12">
 					<div class="blog-details">
+						<?php if (isset($blog->image) && !empty($blog->image) && file_exists(UPLOAD_DIR.'blog/'.$blog->image)) {
+                                $thumbnail = UPLOAD_URL.'blog/'.$blog->image;
+                              }else{
+                                $thumbnail = IMAGES_PATH.'no_thumbnail.png';
+                              } ?>
 						<div class="blog-thumb mb-30">
-							<img src="assets/images/blog/16.jpg" alt="" />
+							<img src="<?php echo $thumbnail; ?>" alt="" />
 						</div>
 						<div class="blog-details-title">
-							<h3>Make Your Home Beautiful!</h3>
+							<h3><?php echo $blog->title; ?></h3>
 						</div>
 						<div class="blog-details-text">
-							<p>Turner's dedicated Interiors / Special Projects Division team is able to meet the unique requirements of delivering highly-finished tenant fit-outs in new and existing buildings. The assignments are fast-paced and our services address client needs for efficiency and flexibility. Our staff is experienced in working with architects, interior design firms, engineers, developers and clients in the public and private sectors.</p>
 							<blockquote>
-								“If you’re going to try, go all the way. There is no other feeling like that. You will be alone with the gods, and the nights will flame with fire. You will ride life straight to perfect laughter. It’s the only good fight there is.”
-								<h5>John Wisk - <span>CEO DeerCreative</span></h5>
+								<?php echo html_entity_decode($blog->quote); ?>
+								<h5><?php echo $blog->quoteby; ?>- <span><?php echo $blog->bypost; ?></span></h5>
 							</blockquote>
-							<p>Turner's work includes commercial and retail banking projects, financial and investment facilities, corporate interiors, LEED Certified projects, amusement, data and call centers, seismic and building renovations medical office buildings. Turner's dedicated Interiors / Special Projects Division team is able to meet the unique requirements of delivering highly-finished tenant fit-outs in new and existing buildings.</p>
+							<?php echo html_entity_decode($blog->description); ?>
 						</div>
 					</div>
+					<?php 
+						$comments = new comment();
+						$all_comment = $comments->getActiveCommentByPostId($b);
+						$count = count($all_comment);
+					 ?>
 					<div class="blog-tag-social">
 						<div class="row align-items-center">
 							<div class="col-lg-6">
@@ -56,16 +76,89 @@
 									<a href="#"><i class="fa fa-skype"></i></a>
 								</div>
 								<div class="comments-list pull-right">
-									<a href="#"><i class="fa fa-comment-o"></i>1</a>
+									<a href="#"><i class="fa fa-comment-o"></i><?php echo $count; ?></a>
 									<span>|</span>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="blog-comments">
-						<h4>1 Comments</h4>
+						<h4><?php echo $count; ?> Comments</h4>
 						<ul class="list-none">
-							<li>
+
+						<?php 
+
+							if ($all_comment) {
+								foreach ($all_comment as $key => $main_comment) {
+									if ($main_comment->commentid !=0  || ($main_comment->status=='Inactive')) {
+										continue;
+									}
+						?>
+						<li>
+								<div class="comment-avatar">
+									<img src="assets/images/logo.png" alt="" />
+								</div>
+								<div class="comment-desc">
+									<small><?php echo date('d M Y', strtotime((isset($main_comment->updated_date) && !empty($main_comment->updated_date))?$main_comment->updated_date:$main_comment->created_date)); ?></small>
+									<h4><?php echo $main_comment->commentor; ?></h4>
+								<p><?php echo $main_comment->comment; ?></p>
+									<div class="comment-reaction">
+										
+										<!-- <a href="#" data-like_id="<?php echo $main_comment->id; ?>" onclick="likes(this)"> -->
+										<!-- <?php 
+											$like = new like();
+											$all_like = $like->getLikeByCommentId($main_comment->id);
+											if ($all_like) {
+												echo $all_like[0]->likes." ";
+											}
+										?>
+										Like</a> -->
+										<a href="#section" data-comment_id="<?php echo $main_comment->id; ?>" onclick="entry(this);">Reply</a>
+									</div>
+								</div>
+								<ul class="list-none">
+								<?php 
+									foreach ($all_comment as $key => $child_comment) {
+										if(($child_comment->commentid)==0 || ($child_comment->commentid) != ($main_comment->id) || ($child_comment->status=='Inactive')){
+											continue;
+										}
+								?>
+									<li>
+										<div class="comment-avatar">
+											<img src="assets/images/logo.png" alt="" />
+										</div>
+										<div class="comment-desc">
+											<small><?php echo date('d M Y', strtotime((isset($child_comment->updated_date) && !empty($child_comment->updated_date))?$child_comment->updated_date:$child_comment->created_date)); ?></small>
+											<h4><?php echo $child_comment->commentor; ?></h4>
+											<p><?php echo $child_comment->comment; ?></p>
+											<div class="comment-reaction">
+												<!-- <a href="#" data-like_id="<?php echo $child_comment->id; ?>" onclick="likes(this)">
+												<?php 
+													$like = new like();
+													$all_like = $like->getLikeByCommentId($child_comment->id);
+													if ($all_like) {
+														echo $all_like[0]->likes." ";
+													}
+												?>
+												Like</a> -->
+												<!-- <a href="#">Reply</a> -->
+											</div>
+										</div>
+									</li>
+								<?php
+									}
+								?>
+								</ul>
+							</li>
+						<?php		
+								}
+							}
+						?>
+
+
+
+
+							<!-- <li>
 								<div class="comment-avatar">
 									<img src="assets/images/blog/comment/1.jpg" alt="" />
 								</div>
@@ -122,25 +215,33 @@
 										<a href="#">Reply</a>
 									</div>
 								</div>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 					<div class="blog-comment-form mt-50">
+						<div id="section" style="height: 60px;"></div>
 						<h4>Leave A Comment</h4>
-						<div class="row mt-30">
+						<form class="row mt-30">
 							<div class="col-sm-6 single-form">
-								<input type="text" placeholder="Name" />
+								<input type="number" name="b" id="b" value="<?php echo $b ?>" style="display: none;" />
+							</div>
+							<div class="col-sm-6 single-form">
+								<input type="number" name="commentid" id="commentid" style="display: none;"/>
+							</div>
+							<div class="col-sm-6 single-form">
+								<input type="text" placeholder="Name" name="commentor" id="commentor" />
 							</div>
 							<div class="col-sm-6">
-								<input type="text" placeholder="Email" />
+								<input type="text" placeholder="Email" name="email" id="email" />
 							</div>
 							<div class="col-sm-12 mt-30">
-								<textarea placeholder="Messages"></textarea>
+								<textarea placeholder="Message" id="comment"></textarea>
 							</div>
 							<div class="col-sm-12">
-								<button class="btn-common mt-25">Send message</button>
+								<button type="button" class="btn-common mt-25" id="submit_comment">Send message</button>
+								<span id="comment-message">Comments Will Be Added After Verification!</span>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-12">
@@ -150,44 +251,27 @@
 							<h4>Recent News</h4>
 							<div class="blog-recent-post">
 								<ul class="list-none">
+									<?php 
+										$recent_blog = $blogs->getBlogUsingLimit(0, 4);
+										if ($recent_blog) {
+											foreach ($recent_blog as $key => $blog) {
+									?>
 									<li>
-										<h5><a href="#">Growing & Caring for Your Garden!</a></h5>
-										<small>October 7, 2017</small>
+										<h5><a href="blog-details?b=<?php echo $blog->id; ?>"><?php echo $blog->title; ?></a></h5><br style="line-height: 0%"><br style="line-height: 0px">
+										<small><?php echo date("M d, Y",strtotime((isset($blog->updated_date) && !empty($blog->updated_date))?$blog->updated_date:$blog->created_date)); ?></small>
 									</li>
-									<li>
-										<h5><a href="#">Why The Landscaper Is The Best For Business</a></h5>
-										<small>October 7, 2017</small>
-									</li>
-									<li>
-										<h5><a href="#">Job: Fulltime (+50 hours per week) Landscapers</a></h5>
-										<small>October 7, 2017</small>
-									</li>
-									<li>
-										<h5><a href="#">Leaves Should Be Shredded Before Used as Mulch</a></h5>
-										<small>October 7, 2017</small>
-									</li>
+									<?php
+											}
+										}
+									?>
 								</ul>
 							</div>
 						</div>
-						<div class="single-sidebar no-bg">
-							<h4>Categories</h4>
-							<ul class="p-0 ml-20">
-								<li><a href="#">Flower Growth (3)</a></li>
-								<li><a href="#">Gardening (7)</a></li>
-								<li><a href="#">Nature Changes (1)</a></li>
-								<li><a href="#">Plant Care (3)</a></li>
-								<li><a href="#">Uncategorized (8)</a></li>
-							</ul>
-						</div>
-						<div class="single-sidebar no-bg sm-mb-0">
-							<h4>Popular Tags</h4>
-							<div class="tags-list style-2">
-								<a href="#">Equipments</a>
-								<a href="#">Plant</a>
-								<a href="#">Seed</a>
-								<a href="#">Decoration</a>
-								<a href="#">Green</a>
-								<a href="#">Pot</a>
+						<div class="ad-placeholder overlay">
+							<img src="assets/images/sidebar/1.jpg" alt="" />
+							<div class="adplace-text">
+								<h4>Banner Advertising</h4>
+								<span>350 x 300</span>
 							</div>
 						</div>
 					</div>
@@ -195,22 +279,61 @@
 			</div>
 		</div>
 	</div>
+
 	<!--blog-area end-->
 	
-	<!--subscribe-area start-->
-	<div class="subscribe-area mt-100 sm-mt-80 xs-mt-70">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 offset-lg-3">
-					<div class="subscribe-form">
-						<h3>Subscribe To Our Newletter</h3>
-						<p>We will send you the monthly Newsletter</p>
-						<input type="email" placeholder="Your Email" />
-						<button class="btn-common">Subscribe</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--subscribe-area end-->
 <?php include 'inc/footer.php'; ?>
+<script>
+	$('#submit_comment').click(function(){
+		var b = $('#b').val();
+		var commentid = $('#commentid').val();
+		var commentor = $('#commentor').val();
+		var email = $('#email').val();
+		var comment = $('#comment').val();
+	    $.ajax({
+	      url: 'process/api',
+	      method: 'post',
+	      data: {
+	        b: b,
+	        commentid: commentid,
+	        commentor: commentor,
+	        comment: comment,
+	        email: email,
+	        act: '<?php echo substr(md5("insert-comment"),3,20); ?>'
+	      }
+	    })
+	    .done(function(ret){
+	      console.log(ret);
+	      if(typeof(ret) != 'object'){
+	        ret = $.parseJSON(ret);
+	      }
+	      ret = ret.body[0];
+	      console.log(ret);
+	      if (ret >=1) {
+	      	$('#comment-message').css('display', 'inline-block')
+	      }
+	    })
+	    .fail(function(data){
+	    });
+	});
+	function entry(element){
+		var commentid = $(element).data('comment_id');
+		console.log(commentid);
+		$('#commentid').val(commentid);
+	}
+	function likes(element){
+		var like_id = $(element).data('like_id');
+		console.log(like_id);
+		$.ajax({
+			url: 'process/api',
+			method: 'post',
+			data: {
+				act: '<?php echo substr(md5("Hit Like"), 3,10) ?>',
+				id: like_id
+			}
+		})
+		.done(function(ret){
+			console.log(ret);
+		});
+	}
+</script>

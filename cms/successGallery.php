@@ -13,7 +13,7 @@ include_once 'inc/checklogin.php';
             <?php flashMessage(); ?>
             <div class="page-title">
               <div class="title_left">
-                <h3>Office List</h3>
+                <h3>Success Student List</h3>
               </div>
               <div class="title_right">
                 <!-- <a href="javascript:;" class="btn btn-success pull-right" onclick="showaddgallery();">Add Gallery</a> -->
@@ -34,7 +34,7 @@ include_once 'inc/checklogin.php';
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>All Office</h2>
+                    <h2>All Success Student</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">

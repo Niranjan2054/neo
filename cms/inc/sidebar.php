@@ -42,7 +42,7 @@
                       <li><a href="subscriber">Subscriber</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-group"></i> Admission <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-group"></i> Student <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="student">Admit New Student</a></li>
                       <li><a href="student-list">List Student</a></li>
@@ -50,10 +50,16 @@
                   </li>
                   <li><a href="successGallery"><i class="fa fa-graduation-cap"></i> Success Gallery</span></a>
                   </li>
+                  <li><a href="certified"><i class="fa fa-certificate"></i> Certified Student</span></a>
+                  </li>
+                  <li><a href="gallery"><i class="fa fa-file-image-o"></i> Gallery</span></a>
+                  </li>
                   <li><a href="testimonials"><i class="fa fa-quote-left"></i> Testimonials </span></a>
                   <li><a href="transaction"><i class="fa fa-user"></i> Transaction(Payment) </span></a>
                     <ul class="nav child_menu">
                     </ul>
+                  </li>
+                  <li><a href="blog"><i class="fa fa-newspaper-o"></i> Blog</span></a>
                   </li>
                   <li><a href="order"><i class="fa fa-shopping-cart"></i> Orders</span></a>
                   </li>

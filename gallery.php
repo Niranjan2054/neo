@@ -16,14 +16,21 @@
 		</div>
 	</div>
 	<!--page-banner-area end-->
-	
+	<?php 
+		$page = 1;
+		if (isset($_GET['page']) && !empty($_GET['page']) && $_GET['page']>0) {
+			$page = $_GET['page'];
+		}
+		$no_of_item = 8;
+		$offset = ($page-1) * $no_of_item;
+	?>
 	<!--project-area start-->
 	<div class="project-area mt-90 sm-mt-70">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2">
 					<div class="section-title text-center">
-						<h3>Project Gallery</h3>
+						<h3>Photo Gallery</h3>
 					</div>
 				</div>
 			</div>
@@ -31,123 +38,53 @@
 				<div class="col-lg-12">
 					<div class="project-nav">
 						<ul>
-							<li data-filter="*" class="active">All Projects</li>
-							<li data-filter=".law-care">Lawn Care</li>
-							<li data-filter=".garden-care">Garden Care</li>
-							<li data-filter=".planting">Planting</li>
-							<li data-filter=".landscape">Landscape</li>
+							<li data-filter="*" class="active">All Photo</li>
+							<li data-filter=".excursion">Excursion</li>
+							<li data-filter=".event">Program</li>
+							<li data-filter=".classes">Classes</li>
+							<li data-filter=".participation">Participation</li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="row mt-35 project-items">
-				<div class="col-lg-3 col-md-6 col-sm-12 law-care">
+			<?php 
+				$gallery = new gallery();
+				$counter = 0;
+				$gallerries = $gallery->getallGallery();
+				if ($gallerries) {
+					$counter = count($gallerries);
+				}
+				$all_gallery = $gallery->getGalleryUsingLimit($offset,$no_of_item);
+				// debugger($all_gallery);
+				foreach ($all_gallery as $key => $Gallery) {
+			?>
+				<div class="col-lg-3 col-md-6 col-sm-12 <?php echo $Gallery->type; ?>">
 					<div class="single-project mb-30">
+						<?php if (isset($Gallery->featured_image) && !empty($Gallery->featured_image) && file_exists(UPLOAD_DIR.'gallery/'.$Gallery->featured_image)) {
+                            $thumbnail = UPLOAD_URL.'gallery/'.$Gallery->featured_image;
+                          }else{
+                            $thumbnail = IMAGES_PATH.'no_thumbnail.png';
+                          } ?>
 						<div class="project-thumb">
-							<img src="assets/images/projects/gallery/1.jpg" alt=""/>
+							<img src="<?php echo $thumbnail; ?>" alt=""/>
 						</div>
 						<div class="project-desc">
-							<a class="venobox" data-gall="projectGallery" href="assets/images/projects/gallery/1.jpg"><i class="fa fa-expand"></i></a>
-							<h4><a href="gallery-details.html">Flowerscaping</a></h4>
+							<h4  style="margin-top: -60px;"><a href="gallery-details?gid=<?php echo $Gallery->id; ?>" style="margin-top: -90px;"><?php echo $Gallery->title; ?></a></h4>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 garden-care">
-					<div class="single-project mb-30">
-						<div class="project-thumb">
-							<img src="assets/images/projects/gallery/2.jpg" alt=""/>
-						</div>
-						<div class="project-desc">
-							<a class="venobox" data-gall="projectGallery" href="assets/images/projects/gallery/2.jpg"><i class="fa fa-expand"></i></a>
-							<h4><a href="gallery-details.html">Flowerscaping</a></h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 planting">
-					<div class="single-project mb-30">
-						<div class="project-thumb">
-							<img src="assets/images/projects/gallery/3.jpg" alt=""/>
-						</div>
-						<div class="project-desc">
-							<a class="venobox" data-gall="projectGallery" href="assets/images/projects/gallery/3.jpg"><i class="fa fa-expand"></i></a>
-							<h4><a href="gallery-details.html">Flowerscaping</a></h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 landscape">
-					<div class="single-project mb-30">
-						<div class="project-thumb">
-							<img src="assets/images/projects/gallery/4.jpg" alt=""/>
-						</div>
-						<div class="project-desc">
-							<a class="venobox" data-gall="projectGallery" href="assets/images/projects/gallery/4.jpg"><i class="fa fa-expand"></i></a>
-							<h4><a href="gallery-details.html">Flowerscaping</a></h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 law-care">
-					<div class="single-project mb-30">
-						<div class="project-thumb">
-							<img src="assets/images/projects/gallery/5.jpg" alt=""/>
-						</div>
-						<div class="project-desc">
-							<a class="venobox" data-gall="projectGallery" href="assets/images/projects/gallery/5.jpg"><i class="fa fa-expand"></i></a>
-							<h4><a href="gallery-details.html">Flowerscaping</a></h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 garden-care">
-					<div class="single-project mb-30">
-						<div class="project-thumb">
-							<img src="assets/images/projects/gallery/6.jpg" alt=""/>
-						</div>
-						<div class="project-desc">
-							<a class="venobox" data-gall="projectGallery" href="assets/images/projects/gallery/6.jpg"><i class="fa fa-expand"></i></a>
-							<h4><a href="gallery-details.html">Flowerscaping</a></h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 law-care">
-					<div class="single-project mb-30">
-						<div class="project-thumb">
-							<img src="assets/images/projects/gallery/7.jpg" alt=""/>
-						</div>
-						<div class="project-desc">
-							<a class="venobox" data-gall="projectGallery" href="assets/images/projects/gallery/7.jpg"><i class="fa fa-expand"></i></a>
-							<h4><a href="gallery-details.html">Flowerscaping</a></h4>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 garden-care">
-					<div class="single-project mb-30">
-						<div class="project-thumb">
-							<img src="assets/images/projects/gallery/8.jpg" alt=""/>
-						</div>
-						<div class="project-desc">
-							<a class="venobox" data-gall="projectGallery" href="assets/images/projects/gallery/8.jpg"><i class="fa fa-expand"></i></a>
-							<h4><a href="gallery-details.html">Flowerscaping</a></h4>
-						</div>
-					</div>
-				</div>
+
+			<?php
+				}
+			?>
+			</div>
+			<div class="blog-pagination mt-80 sm-mt-60 fix">
+				<a href="gallery?page=<?php echo ($page-1) ?>"  class="btn-common btn-left" <?php echo ($page<=1)?'style="display: none"':''; ?> ><i class="fa fa-angle-left"></i> Newer POSTS</a>
+				
+				<a href="gallery?page=<?php echo ($page+1) ?>" <?php echo ($page>(($counter-1)/$no_of_item))?'style="display: none"':''; ?> class="btn-common btn-right">Older POSTS <i class="fa fa-angle-right"></i></a>
 			</div>
 		</div>
 	</div>
 	<!--project-area end-->
-	
-	<!--subscribe-area start-->
-	<div class="subscribe-area mt-70 sm-mt-50">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 offset-lg-3">
-					<div class="subscribe-form">
-						<h3>Subscribe To Our Newletter</h3>
-						<p>We will send you the monthly Newsletter</p>
-						<input type="email" placeholder="Your Email" />
-						<button class="btn-common">Subscribe</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--subscribe-area end-->
 	<?php include 'inc/footer.php'; ?>

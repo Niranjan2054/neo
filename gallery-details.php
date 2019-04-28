@@ -16,36 +16,90 @@
 		</div>
 	</div>
 	<!--page-banner-area end-->
-	
+	<?php
+		if ($_GET) {
+		 	if (isset($_GET['gid']) && !empty($_GET['gid']) && $_GET['gid']>0) {
+		 		$gallery_id = (int)$_GET['gid'];
+				$gallery = new gallery();
+		 		$gallery_info = $gallery->getGalleryById($gallery_id);
+		 		if ($gallery_info) {
+		 			$gallery_info = $gallery_info[0];
+		 			$image = new image();
+		 			$gallery_image = $image->getImageUsingLimit(0,2,$gallery_id);
+		 		}else{
+		 			setFlash('gallery');
+		 		}
+		 	}else{	
+		 		setFlash('gallery');
+		 	}
+		}else{
+			setFlash('gallery');
+		} 
+	?>
 	<!--gallery-details start-->
 	<div class="gallery-details-area mt-95 sm-mt-70">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="project-gallery-details">
-						<h4>John Wick ‘s Garden</h4>
-						<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+						<h4><?php echo $gallery_info->title; ?></h4>
+						<?php echo html_entity_decode($gallery_info->description); ?>
 						<div class="slider slider-for mt-15 sm-mt-45">
+							<?php if (isset($gallery_info->featured_image) && !empty($gallery_info->featured_image) && file_exists(UPLOAD_DIR.'gallery/'.$gallery_info->featured_image)) {
+                            $thumbnail = UPLOAD_URL.'gallery/'.$gallery_info->featured_image;
+                          }else{
+                            $thumbnail = IMAGES_PATH.'no_thumbnail.png';
+                          } ?>
 							<div>
-								<img src="assets/images/projects/gallery-details/1.jpg" alt="" />
+								<img src="<?php echo $thumbnail; ?>" alt="" />
 							</div>
+							<?php 
+								if ($gallery_image) {
+									foreach ($gallery_image as $key => $gal) {
+							
+										if (isset($gal->image) && !empty($gal->image) && file_exists(UPLOAD_DIR.'gallery/'.$gal->image)) {
+                           					$thumbnail1 = UPLOAD_URL.'gallery/'.$gal->image;
+                          				}else{
+                            				$thumbnail1 = IMAGES_PATH.'no_thumbnail.png';
+                          				} 
+                          	?>
 							<div>
-								<img src="assets/images/projects/gallery-details/2.jpg" alt="" />
+								<img src="<?php echo $thumbnail1 ?>" alt="" />
 							</div>
-							<div>
+							<?php
+									}
+								}
+							?>
+							
+							<!-- <div>
 								<img src="assets/images/projects/gallery-details/3.jpg" alt="" />
-							</div>
+							</div> -->
 						</div>
 						<div class="slider slider-nav mt-15">
 							<div class="single-nav">
-								<img src="assets/images/projects/gallery-details/1.jpg" alt="" />
+								<img src="<?php echo $thumbnail; ?>" alt="" />
 							</div>
+							<?php 
+								if ($gallery_image) {
+									foreach ($gallery_image as $key => $gal) {
+							
+										if (isset($gal->image) && !empty($gal->image) && file_exists(UPLOAD_DIR.'gallery/'.$gal->image)) {
+                           					$thumbnail1 = UPLOAD_URL.'gallery/'.$gal->image;
+                          				}else{
+                            				$thumbnail1 = IMAGES_PATH.'no_thumbnail.png';
+                          				} 
+                          	?>
+							
 							<div class="single-nav">
-								<img src="assets/images/projects/gallery-details/2.jpg" alt="" />
+								<img src="<?php echo $thumbnail1; ?>" alt="" />
 							</div>
-							<div class="single-nav">
+							<?php
+									}
+								}
+							?>
+							<!-- <div class="single-nav">
 								<img src="assets/images/projects/gallery-details/3.jpg" alt="" />
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -79,21 +133,4 @@
 		</div>
 	</div>
 	<!--gallery-details end-->
-	
-	<!--subscribe-area start-->
-	<div class="subscribe-area mt-70 sm-mt-50">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 offset-lg-3">
-					<div class="subscribe-form">
-						<h3>Subscribe To Our Newletter</h3>
-						<p>We will send you the monthly Newsletter</p>
-						<input type="email" placeholder="Your Email" />
-						<button class="btn-common">Subscribe</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--subscribe-area end-->
 <?php include 'inc/footer.php'; ?>
